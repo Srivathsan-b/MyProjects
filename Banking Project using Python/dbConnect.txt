@@ -1,0 +1,8 @@
+import mysql.connector
+
+try:
+   db=mysql.connector.connect(user='root',password='',host='localhost',database='')
+   cursor=db.cursor()
+   print("Connected")
+except:
+   print("Not Connected")
