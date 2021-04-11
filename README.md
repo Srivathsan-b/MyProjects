@@ -1,4 +1,4 @@
-# MyProjects - Open source Projects.
+# Open source Projects.
 
 Hi Programmer! Welcome!. 
 
