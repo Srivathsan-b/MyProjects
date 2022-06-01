@@ -1,3 +1,4 @@
+# Update the Details of the customer
 import mysql.connector
 class DetailsUpdate:
     def detailsUpdate(self):
