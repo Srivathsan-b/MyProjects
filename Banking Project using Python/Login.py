@@ -1,3 +1,4 @@
+#Login form
 import mysql.connector
 class Login:
     def custlogin(self):
