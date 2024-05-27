@@ -55,7 +55,18 @@ def extract_text_from_docx_file(uploaded_file):
     return docx2txt.process(uploaded_file)
 
 # Prompt Template
-input_prompt_template = f""
+input_prompt_template = """
+As an experienced Applicant Tracking System (ATS) analyst,
+with profound knowledge in technology, software engineering, data science,
+and big data engineering, your role involves evaluating resumes against job descriptions.
+Recognizing the competitive job market, provide top-notch assistance for resume improvement.
+Your goal is to analyze the resume against the given job description,
+assign a percentage match based on key criteria, and pinpoint missing keywords accurately.
+resume: {text}
+description: {job_description}
+I want the response in a dictionary having the structure
+{{"Candidate name:"", "Job Description Match": "%", "Missing Keywords":"", "Candidate Summary": "", "Experience": ""}}
+"""
 
 # Streamlit app
 # Initialize Streamlit app
@@ -64,6 +75,29 @@ def main():
     st.markdown('<style>h1{color: orange; text-align: center;}</style>', unsafe_allow_html=True)
     job_description = st.text_area("Paste the Job Description", height=300) 
     uploaded_file = st.file_uploader("Upload Your Resume", type=["pdf", "docx"], help="Please upload a PDF or DOCX file")
+    
+    # Copyright using streamlit
+    st.markdown(
+        """
+        <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        </style>
+        <div class="footer">
+            &copy; Designed and Developed by Srivathsan B
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
     submit_button = st.button("Submit")
 
     if submit_button:
