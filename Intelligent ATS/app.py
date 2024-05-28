@@ -115,10 +115,17 @@ def main():
         response_table = response_table.transpose()
 
         # Extract Job Description Match percentage from the response
-        match_percentage_str = response_text.split('"Job Description Match":"')[1].split('"')[0]
+        try:
+            match_percentage_str = response_text.split('"Job Description Match":"')[1].split('"')[0]
 
-        # Remove percentage symbol and convert to float
-        match_percentage = float(match_percentage_str.rstrip('%'))
+            # Remove percentage symbol and convert to float
+            match_percentage = float(match_percentage_str.rstrip('%'))
+            
+        except Exception as e:
+            match_percentage_str = str(response_text.split('"Job Description Match":"'))
+
+            # Match percentage is undetermined 
+            match_percentage = 0
 
         st.subheader("ATS Evaluation Result:")
         st.write(response_table)
@@ -126,6 +133,8 @@ def main():
         # Display message based on Job Description Match percentage
         if match_percentage >= 80:
             st.text("Move forward with hiring")
+        elif match_percentage == 0:
+            st.text("Job description and Resume does not match.")
         else:
             st.text("Not a match")
 
